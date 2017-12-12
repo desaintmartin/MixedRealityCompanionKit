@@ -2,7 +2,11 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 #include "stdafx.h"
-#include "DeckLinkManager.h"
+#include "DeckLinkManager.h"*
+#include <string>
+#include <iostream>
+
+using namespace std;
 
 #if USE_DECKLINK || USE_DECKLINK_SHUTTLE
 
@@ -64,11 +68,12 @@ HRESULT DeckLinkManager::Initialize(ID3D11ShaderResourceView* colorSRV, ID3D11Te
                     BMDDisplayMode videoDisplayMode;
                     if (FRAME_HEIGHT < 1080)
                     {
-                        videoDisplayMode = bmdModeHD720p5994;
+						// See https://github.com/kylemcdonald/ofxBlackmagic/blob/master/libs/DeckLink/include/DeckLinkAPIModes.h
+						videoDisplayMode = bmdModeHD720p50; //bmdModeHD720p5994;
                     }
                     else if (FRAME_HEIGHT >= 1080 && FRAME_HEIGHT < 2160)
                     {
-                        videoDisplayMode = bmdModeHD1080p5994;
+						videoDisplayMode = bmdModeHD1080i50; //bmdModeHD1080p5994;
 #if USE_DECKLINK_SHUTTLE
                         videoDisplayMode = bmdModeHD1080p2398;
 #endif
